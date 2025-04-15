@@ -1,10 +1,10 @@
-# 🧬 Genome Mapinator
+#  Genome Mapinator
 
 **Genome Mapinator** is a pipeline that automates genome annotation, feature visualization, and the creation of genome maps in PDF format. It combines tools like **Prodigal**, **AnnoMazing**, **Lovis4U**, and custom GFF manipulation scripts to produce a visual and annotated genome map from a folder of FASTA files.
 
 ---
 
-## 📦 Features
+##  Features
 
 - Runs gene prediction using **Prodigal**
 - Annotates protein sequences with **Pfam** domains using **AnnoMazing**
@@ -17,7 +17,7 @@
 
 ---
 
-## 🚀 Installation
+##  Installation
 
 Before using Genome Mapinator, make sure you have the following tools installed and accessible in your environment:
 
@@ -31,7 +31,7 @@ You will also need to download the Pfam database and place it in the hmms folder
 
 ---
 
-## 🧰 Usage
+##  Usage
 
 ```bash
 python genome_mapinator.py -i /path/to/input_folder -o /path/to/output_folder
