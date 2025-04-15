@@ -9,7 +9,7 @@
 - Runs gene prediction using **Prodigal**
 - Annotates protein sequences with **Pfam** domains using **AnnoMazing**
 - Edits and finalizes GFF files with associated sequence-region headers
-- Generates annotated circular genome maps using **Lovis4U**
+- Generates annotated genome maps using **Lovis4U**
 - Produces a clean final output with:
   - `Genome_map.pdf`
   - Annotated `.csv` files
