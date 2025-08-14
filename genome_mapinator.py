@@ -12,7 +12,26 @@ args = parse_args()
 input_dir = args.input_dir
 output_dir = args.output
 os.makedirs(output_dir)
-
+#Make a function to process the input directory to make all contig headers be the file name
+def process_fasta_headers(input_dir):
+    for filename in os.listdir(input_dir):
+        if filename.endswith(".fna") or filename.endswith(".fasta"):
+            file_path = os.path.join(input_dir, filename)
+            with open(file_path, 'r') as file:
+                lines = file.readlines()
+            # Modify the header lines
+            new_lines = []
+            for line in lines:
+                if line.startswith('>'):
+                    # Replace the header with the filename without extension
+                    new_header = f">{os.path.splitext(filename)[0]}\n"
+                    new_lines.append(new_header)
+                else:
+                    new_lines.append(line)
+            # Write the modified lines back to the file
+            with open(file_path, 'w') as file:
+                file.writelines(new_lines)
+process_fasta_headers(input_dir)
 def run_prodigal(input_dir, output_dir):
     os.mkdir(output_dir+"_Prodigal")
     #run prodigal script from scripts folder
@@ -78,6 +97,7 @@ feature_annot=pd.read_csv('lovis_out_1/feature_annotation_table.tsv', sep='\t')
 pfam_annot=pd.read_csv(output_dir+'_annomazing_final.csv')
 #remove .fna_final-1 from feature_id column
 feature_annot['feature_id'] = feature_annot['feature_id'].str.replace('.fna_final-1', '')
+feature_annot['feature_id'] = feature_annot['feature_id'].str.replace('.fasta_final-1', '')
 #map pfam DE column to feature annotation[name]
 feature_annot['name']=feature_annot['feature_id'].map(pfam_annot.set_index('query_id')['DE'])
 #If the name column is not NA, set show_label to 1
@@ -121,7 +141,7 @@ move= 'mv '+output_dir+'_Prodigal '+output_dir
 subprocess.call(move, shell=True)
 #remove feature_annotation_table.tsv
 delete= 'rm feature_annotation_table.tsv'
-subprocess.call(delete, shell=True)
+#subprocess.call(delete, shell=True)
 #remove .err and .out files
 delete= 'rm *.err'
 subprocess.call(delete, shell=True)
