@@ -81,7 +81,6 @@ def create_gff_csv(input_dir, output_dir):
 gff_folder =output_dir+"_gff_files"
 create_gff_csv(gff_folder, output_dir)
 
-
 #Run the gffcombiner script
 gff_out= output_dir+'_gff_files_final'
 os.makedirs(gff_out)
